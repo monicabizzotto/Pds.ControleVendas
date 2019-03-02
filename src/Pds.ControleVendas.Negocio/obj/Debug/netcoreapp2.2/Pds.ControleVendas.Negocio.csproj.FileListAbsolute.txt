@@ -1,0 +1,14 @@
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.deps.json
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.dll
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.pdb
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Dados.dll
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.dll
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Dados.pdb
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.pdb
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.csprojAssemblyReference.cache
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.csproj.CoreCompileInputs.cache
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.AssemblyInfoInputs.cache
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.AssemblyInfo.cs
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.csproj.CopyComplete
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.dll
+D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Negocio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Negocio.pdb

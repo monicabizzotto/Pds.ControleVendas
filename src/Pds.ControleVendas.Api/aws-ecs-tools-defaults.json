@@ -1,0 +1,27 @@
+
+{
+    "region" : "us-east-1",
+    "profile" : "default",
+    "configuration" : "Release",
+    "tag"           : "pdscontrolevendasapi:latest",
+    "docker-build-working-dir" : "",
+    "cluster"                  : "default",
+    "launch-type"              : "FARGATE",
+    "launch-subnets"           : "subnet-fc2716b6,subnet-50a3c10c,subnet-61482906,subnet-65771b4b,subnet-a074c19e,subnet-03451e0c",
+    "launch-security-groups"   : "sg-dddfb698",
+    "assign-public-ip"         : true,
+    "task-definition-name"     : "PdsControleVendasApi",
+    "task-cpu"                 : "256",
+    "task-memory"              : "512",
+    "task-definition-task-role" : "arn:aws:iam::685230404982:role/ecsTaskExecutionRole",
+    "task-execution-role"       : "ecsTaskExecutionRole",
+    "container-name"            : "PdsControleVendasApi",
+    "container-port-mapping"    : "80:80,443:443",
+    "container-environment-variables" : "\"ASPNETCORE_ENVIRONMENT\"=\"Production\"",
+    "skip-image-push"                 : false,
+    "cluster-service"                 : "PdsControleVendasApi",
+    "desired-count"                   : 1,
+    "deployment-minimum-healthy-percent" : 50,
+    "deployment-maximum-percent"         : 200,
+    "vstoolkit-deployment-mode"          : "DeployService"
+}
