@@ -15,6 +15,7 @@ namespace Pds.ControleVendas.Dados
 		public ProdutoDados(IAmazonS3 s3Client)
 		{
 			arquivoDados = new ArquivoDados(s3Client);
+			var r = arquivoDados.ListarArquivos();
 		}
 
 		public List<Produto> GetProdutos()
