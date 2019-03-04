@@ -1,9 +1,0 @@
-D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Dominio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.deps.json
-D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Dominio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.dll
-D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Dominio\bin\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.pdb
-D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Dominio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.csproj.CoreCompileInputs.cache
-D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Dominio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.AssemblyInfoInputs.cache
-D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Dominio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.AssemblyInfo.cs
-D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Dominio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.dll
-D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Dominio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.pdb
-D:\Desenvolvimento\source\repos\Pds\Pds.ControleVendas\src\Pds.ControleVendas.Dominio\obj\Debug\netcoreapp2.2\Pds.ControleVendas.Dominio.csprojAssemblyReference.cache
