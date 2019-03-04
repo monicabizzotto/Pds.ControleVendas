@@ -1,23 +1,30 @@
-﻿using Pds.ControleVendas.Dominio;
+﻿using Amazon.S3;
+using Pds.ControleVendas.Dominio;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Pds.ControleVendas.Dados
 {
 	public class PedidoDados
 	{
 		private string path = @"C:\Users\pgoli\OneDrive\POCMonica\TemplateArquivos\ListaPedido.txt";
-		private string retornoPedidoPath = @"C:\Users\pgoli\OneDrive\POCMonica\TemplateArquivos\RetornoPedido.txt";
+		//private string retornoPedidoPath = @"C:\Users\pgoli\OneDrive\POCMonica\TemplateArquivos\RetornoPedido.txt";
 
-		public PedidoDados()
+		private ArquivoDados arquivoDados;
+
+		public PedidoDados(IAmazonS3 s3Client)
 		{
+			arquivoDados = new ArquivoDados(s3Client);
 		}
 
 		public Pedido AddPedido(Pedido pedido)
 		{
-			StreamReader streamReader = new StreamReader(path);
+			var ms = arquivoDados.GetArquivo("ListaPedido.txt");
+			Task.WaitAll(ms);
+			StreamReader streamReader = new StreamReader(ms.Result);
 
 			string linha = "";
 
@@ -49,7 +56,9 @@ namespace Pds.ControleVendas.Dados
 		}
 		public List<RetornoPedido> GetRetornoPedido()
 		{
-			StreamReader streamReader = new StreamReader(retornoPedidoPath);
+			var ms = arquivoDados.GetArquivo("RetornoPedido.txt");
+			Task.WaitAll(ms);
+			StreamReader streamReader = new StreamReader(ms.Result);
 
 			string linha = "";
 			List<RetornoPedido> retornoPedidos = new List<RetornoPedido>();
