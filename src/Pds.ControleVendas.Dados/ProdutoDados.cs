@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Pds.ControleVendas.Dados
 {
@@ -15,12 +16,15 @@ namespace Pds.ControleVendas.Dados
 		public ProdutoDados(IAmazonS3 s3Client)
 		{
 			arquivoDados = new ArquivoDados(s3Client);
-			var r = arquivoDados.ListarArquivos();
+			//var r = arquivoDados.ListarArquivos();
 		}
 
 		public List<Produto> GetProdutos()
 		{
-			StreamReader streamReader = new StreamReader(path);
+			var ms = arquivoDados.GetArquivo("ListaProdutos.txt");
+			Task.WaitAll(ms);
+			//StreamReader streamReader = new StreamReader(path);
+			StreamReader streamReader = new StreamReader(ms.Result);
 
 			if (!streamReader.EndOfStream)
 				streamReader.ReadLine();

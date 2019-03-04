@@ -38,17 +38,30 @@ namespace Pds.ControleVendas.Dados
 
 			arquivos = new List<string>(t.Result);
 
-			var gor = s3Client.GetObjectAsync(new Amazon.S3.Model.GetObjectRequest() { BucketName = "controlevendas", Key = arquivos[109] });
-
-			Task.WaitAll(gor);
-
-			GetObjectResponse getObjectResponse = gor.Result;
-			StreamReader reader = new StreamReader(getObjectResponse.ResponseStream);
-
-			var arquivo = reader.ReadToEnd();
-			reader.Close();
-
 			return arquivos;
+		}
+		public async Task<MemoryStream> GetArquivo(string key)
+		{
+			var response = await s3Client.GetObjectAsync(new Amazon.S3.Model.GetObjectRequest() { BucketName = "controlevendas", Key = key });
+
+			byte[] streamBytes = new byte[response.ResponseStream.Length];
+
+			if (response.ResponseStream.CanRead)
+			{
+				try
+				{
+					await response.ResponseStream.ReadAsync(streamBytes, 0, Convert.ToInt32(response.ResponseStream.Length));
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.Message);
+				}
+				response.ResponseStream.Close();
+			}
+
+			MemoryStream memoryStream = new MemoryStream(streamBytes);
+
+			return memoryStream;
 		}
 	}
 }

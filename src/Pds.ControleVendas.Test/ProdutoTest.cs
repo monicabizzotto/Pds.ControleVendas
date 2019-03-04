@@ -1,3 +1,4 @@
+using Amazon.S3;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -6,10 +7,16 @@ namespace Pds.ControleVendas.Test
 {
 	public class ProdutoTest
 	{
+		private IAmazonS3 amazonS3;
+		public ProdutoTest(IAmazonS3 amazonS3)
+		{
+			this.amazonS3 = amazonS3;
+		}
+
 		[Fact]
 		public void ListarProdutos()
 		{
-			var produtoNegocio = new Negocio.ProdutoNegocio();
+			var produtoNegocio = new Negocio.ProdutoNegocio(amazonS3);
 			
 			Assert.NotNull(produtoNegocio);
 			Assert.IsType<Negocio.ProdutoNegocio>(produtoNegocio);
