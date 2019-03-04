@@ -9,27 +9,27 @@ using Pds.ControleVendas.Negocio;
 
 namespace Pds.ControleVendas.Api.Controllers
 {
-	[Route("v1/fornecedor")]
-	[ApiController]
-	public class FornecedorController : ControllerBase
-	{
-		[HttpGet]
-		[Route("")]
-		[ProducesResponseType(typeof(Model.FornecedorResponse), 200)]
-		public async Task<IActionResult> GetFornecedores()
-		{
-			try
-			{
-				FornecedorNegocio fornecedorNegocio = new FornecedorNegocio();
+	//[Route("v1/fornecedor")]
+	//[ApiController]
+	//public class FornecedorController : ControllerBase
+	//{
+	//	[HttpGet]
+	//	[Route("")]
+	//	[ProducesResponseType(typeof(Model.FornecedorResponse), 200)]
+	//	public async Task<IActionResult> GetFornecedores()
+	//	{
+	//		try
+	//		{
+	//			FornecedorNegocio fornecedorNegocio = new FornecedorNegocio();
 
-				var retorno = new FornecedorResponse() { Fornecedores = fornecedorNegocio.GetFornecedores() };
+	//			var retorno = new FornecedorResponse() { Fornecedores = fornecedorNegocio.GetFornecedores() };
 
-				return Ok(retorno);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest();
-			}
-		}
-	}
+	//			return Ok(retorno);
+	//		}
+	//		catch (Exception ex)
+	//		{
+	//			return BadRequest();
+	//		}
+	//	}
+	//}
 }

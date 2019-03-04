@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon.S3;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pds.ControleVendas.Api.Model;
@@ -13,6 +14,12 @@ namespace Pds.ControleVendas.Api.Controllers
 	[ApiController]
 	public class ProdutoController : ControllerBase
 	{
+		private IAmazonS3 s3Client;
+		public ProdutoController(IAmazonS3 s3Client)
+		{
+			this.s3Client = s3Client;
+		}
+
 		[HttpGet]
 		[Route("")]
 		[ProducesResponseType(typeof(Model.ProdutoResponse), 200)]
@@ -20,7 +27,7 @@ namespace Pds.ControleVendas.Api.Controllers
 		{
 			try
 			{
-				ProdutoNegocio produtoNegocio = new ProdutoNegocio();
+				ProdutoNegocio produtoNegocio = new ProdutoNegocio(s3Client);
 
 				var retorno = new ProdutoResponse() { Produtos = produtoNegocio.GetProdutos() };
 

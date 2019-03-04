@@ -24,7 +24,7 @@ namespace Pds.ControleVendas.Api.Controllers
 		}
 
 		[HttpGet]
-		[Route("/status")]
+		[Route("status")]
 		public async Task<IActionResult> GetStatusPedidos()
 		{
 			PedidoNegocio pedidoNegocio = new PedidoNegocio();
@@ -34,7 +34,7 @@ namespace Pds.ControleVendas.Api.Controllers
 			return Ok(pedidoNegocio.GetRetornoPedido());
 		}
 		[HttpGet]
-		[Route("/{idPedido}/status")]
+		[Route("{idPedido}/status")]
 		public async Task<IActionResult> GetStatusPedido(int idPedido)
 		{
 			PedidoNegocio pedidoNegocio = new PedidoNegocio();

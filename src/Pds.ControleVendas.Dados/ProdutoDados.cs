@@ -1,4 +1,5 @@
-﻿using Pds.ControleVendas.Dominio;
+﻿using Amazon.S3;
+using Pds.ControleVendas.Dominio;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,9 +10,11 @@ namespace Pds.ControleVendas.Dados
 	public class ProdutoDados
 	{
 		private string path = @"C:\Users\pgoli\OneDrive\POCMonica\TemplateArquivos\ListaProdutos.txt";
+		private ArquivoDados arquivoDados;
 
-		public ProdutoDados()
+		public ProdutoDados(IAmazonS3 s3Client)
 		{
+			arquivoDados = new ArquivoDados(s3Client);
 		}
 
 		public List<Produto> GetProdutos()

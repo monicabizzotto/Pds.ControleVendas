@@ -1,4 +1,5 @@
-﻿using Pds.ControleVendas.Dados;
+﻿using Amazon.S3;
+using Pds.ControleVendas.Dados;
 using Pds.ControleVendas.Dominio;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,15 @@ namespace Pds.ControleVendas.Negocio
 {
 	public class ProdutoNegocio
 	{
-		public ProdutoNegocio()
+		private IAmazonS3 s3Client;
+		public ProdutoNegocio(IAmazonS3 s3Client)
 		{
+			this.s3Client = s3Client;
 		}
 
 		public List<Produto> GetProdutos()
 		{
-			ProdutoDados produtoDados = new ProdutoDados();
+			ProdutoDados produtoDados = new ProdutoDados(s3Client);
 			FornecedorNegocio fornecedorNegocio = new FornecedorNegocio();
 			var produtos = produtoDados.GetProdutos();
 
