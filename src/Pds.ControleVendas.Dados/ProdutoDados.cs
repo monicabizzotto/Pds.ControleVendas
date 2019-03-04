@@ -10,20 +10,17 @@ namespace Pds.ControleVendas.Dados
 {
 	public class ProdutoDados
 	{
-		private string path = @"C:\Users\pgoli\OneDrive\POCMonica\TemplateArquivos\ListaProdutos.txt";
 		private ArquivoDados arquivoDados;
 
 		public ProdutoDados(IAmazonS3 s3Client)
 		{
 			arquivoDados = new ArquivoDados(s3Client);
-			//var r = arquivoDados.ListarArquivos();
 		}
 
 		public List<Produto> GetProdutos()
 		{
 			var ms = arquivoDados.GetArquivo("ListaProdutos.txt");
 			Task.WaitAll(ms);
-			//StreamReader streamReader = new StreamReader(path);
 			StreamReader streamReader = new StreamReader(ms.Result);
 
 			if (!streamReader.EndOfStream)
