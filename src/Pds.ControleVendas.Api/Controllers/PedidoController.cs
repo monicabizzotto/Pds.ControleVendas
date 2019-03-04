@@ -32,13 +32,14 @@ namespace Pds.ControleVendas.Api.Controllers
 
 		[HttpGet]
 		[Route("status")]
+		[ProducesResponseType(typeof(List<Dominio.RetornoPedido>), 200)]
 		public async Task<IActionResult> GetStatusPedidos()
 		{
 			PedidoNegocio pedidoNegocio = new PedidoNegocio(s3Client);
 
-			pedidoNegocio.GetRetornoPedido();
+			var retorno = pedidoNegocio.GetRetornoPedido();
 
-			return Ok(pedidoNegocio.GetRetornoPedido());
+			return Ok(retorno);
 		}
 		[HttpGet]
 		[Route("{idPedido}/status")]

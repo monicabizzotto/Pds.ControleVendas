@@ -38,5 +38,7 @@ namespace Pds.ControleVendas.Api.Controllers
 				return BadRequest();
 			}
 		}
+
+		//TODO:Implementar getProduto
 	}
 }

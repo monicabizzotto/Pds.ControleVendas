@@ -39,7 +39,7 @@ namespace Pds.ControleVendas.Dados
 			{
 				string[] linhaArr = linha.Split(";");
 
-				pedido.Id = Convert.ToInt32(linhaArr[0]) + 1; 
+				pedido.Id = Convert.ToInt32(linhaArr[0]) + 1;
 			}
 			else
 			{
@@ -51,6 +51,42 @@ namespace Pds.ControleVendas.Dados
 			streamWriter.Write(String.Format("{0};{1};{2};{3};", pedido.Id, pedido.Produto.Id, pedido.Cliente.Id, pedido.Quantidade));
 
 			streamWriter.Close();
+
+			return pedido;
+		}
+		public Pedido GetPedido(int codigo)
+		{
+			var ms = arquivoDados.GetArquivo("ListaPedido.txt");
+			Task.WaitAll(ms);
+			StreamReader streamReader = new StreamReader(ms.Result);
+
+			string linha = "";
+			Pedido pedido = null;
+
+			while (!streamReader.EndOfStream)
+			{
+				linha = streamReader.ReadLine();
+
+				if (!String.IsNullOrEmpty(linha) && !linha.Equals("CodigoPedido;CodigoProduto;CodigoCliente;Quantidade;"))
+				{
+					string[] linhaArr = linha.Split(";");
+
+					if (Convert.ToInt32(linhaArr[0]) == codigo)
+					{
+						pedido = new Pedido()
+						{
+							Id = codigo,
+							Produto = new Produto() { Id = Convert.ToInt32(linhaArr[1]) },
+							Cliente = new Cliente() { Id = Convert.ToInt32(linhaArr[2]) },
+							Quantidade = Convert.ToInt32(linhaArr[3])
+						};
+
+						break;
+					}
+				}
+			}
+
+			streamReader.Close();
 
 			return pedido;
 		}
@@ -70,7 +106,11 @@ namespace Pds.ControleVendas.Dados
 				if (!String.IsNullOrEmpty(linha) && !linha.Equals("CodigoPedido;Status;"))
 				{
 					string[] linhaArr = linha.Split(";");
-					retornoPedidos.Add(new RetornoPedido(Convert.ToInt32(linhaArr[0]), Convert.ToInt32(linhaArr[1])));
+					retornoPedidos.Add(new RetornoPedido()
+					{
+						Pedido = GetPedido(Convert.ToInt32(linhaArr[0])),
+						StatusPedido = StatusPedido.Parse<StatusPedido>(linhaArr[1])
+					});
 				}
 			}
 

@@ -28,5 +28,15 @@ namespace Pds.ControleVendas.Negocio
 
 			return produtos;
 		}
+		public Produto GetProduto(int codigo)
+		{
+			ProdutoDados produtoDados = new ProdutoDados(s3Client);
+
+			var produto = produtoDados.GetProduto(codigo);
+
+			produtoDados = null;
+
+			return produto;
+		}
 	}
 }

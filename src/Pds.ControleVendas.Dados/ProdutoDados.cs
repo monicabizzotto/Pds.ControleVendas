@@ -41,5 +41,36 @@ namespace Pds.ControleVendas.Dados
 
 			return produtos;
 		}
+		public Produto GetProduto(int codigo)
+		{
+			Produto produto = null;
+
+			var ms = arquivoDados.GetArquivo("ListaProdutos.txt");
+			Task.WaitAll(ms);
+			StreamReader streamReader = new StreamReader(ms.Result);
+
+			if (!streamReader.EndOfStream)
+				streamReader.ReadLine();
+
+			List<Produto> produtos = new List<Produto>();
+			string linha;
+			string[] linhaArr;
+
+			while (!streamReader.EndOfStream)
+			{
+				linha = streamReader.ReadLine();
+				linhaArr = linha.Split(";");
+
+				if (Convert.ToInt32(linhaArr[0]) == codigo)
+				{
+					produto = new Produto(Convert.ToInt32(linhaArr[0]), linhaArr[1], new Fornecedor() { Id = Convert.ToInt32(linhaArr[2]) });
+					break;
+				}
+			}
+
+			streamReader.Close();
+
+			return produto;
+		}
 	}
 }
