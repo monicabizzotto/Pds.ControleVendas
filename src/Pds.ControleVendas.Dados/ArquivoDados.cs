@@ -66,5 +66,26 @@ namespace Pds.ControleVendas.Dados
 
 			return memoryStream;
 		}
+		public async Task<bool> PutArquivo(string key, Stream stream)
+		{
+			var request = new PutObjectRequest()
+			{
+				AutoCloseStream = false,
+				BucketName = "controlevendas",
+				InputStream = stream,
+				Key = key
+			};
+			
+			var response = await s3Client.PutObjectAsync(request);
+
+			if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 }

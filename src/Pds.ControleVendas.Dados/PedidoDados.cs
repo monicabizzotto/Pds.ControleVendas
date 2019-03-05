@@ -10,9 +10,6 @@ namespace Pds.ControleVendas.Dados
 {
 	public class PedidoDados
 	{
-		private string path = @"C:\Users\pgoli\OneDrive\POCMonica\TemplateArquivos\ListaPedido.txt";
-		//private string retornoPedidoPath = @"C:\Users\pgoli\OneDrive\POCMonica\TemplateArquivos\RetornoPedido.txt";
-
 		private ArquivoDados arquivoDados;
 
 		public PedidoDados(IAmazonS3 s3Client)
@@ -25,12 +22,17 @@ namespace Pds.ControleVendas.Dados
 			var ms = arquivoDados.GetArquivo("ListaPedido.txt");
 			Task.WaitAll(ms);
 			StreamReader streamReader = new StreamReader(ms.Result);
+			MemoryStream memoryStream = new MemoryStream();
 
 			string linha = "";
+			byte[] linhaBytes;
 
 			while (!streamReader.EndOfStream)
 			{
 				linha = streamReader.ReadLine();
+				linhaBytes = Encoding.Default.GetBytes(linha);
+				memoryStream.Write(linhaBytes, 0, linhaBytes.Length);
+				memoryStream.WriteByte(0x0A);
 			}
 
 			streamReader.Close();
@@ -46,13 +48,27 @@ namespace Pds.ControleVendas.Dados
 				pedido.Id = 1;
 			}
 
-			StreamWriter streamWriter = new StreamWriter(path, true);
-			streamWriter.WriteLine();
-			streamWriter.Write(String.Format("{0};{1};{2};{3};", pedido.Id, pedido.Produto.Id, pedido.Cliente.Id, pedido.Quantidade));
+			//StreamWriter streamWriter = new StreamWriter(path, true);
+			//streamWriter.WriteLine();
 
-			streamWriter.Close();
+			//streamWriter.Write(String.Format("{0};{1};{2};{3};", pedido.Id, pedido.Produto.Id, pedido.Cliente.Id, pedido.Quantidade));
+			memoryStream.Write(Encoding.Default.GetBytes(String.Format("{0};{1};{2};{3};", pedido.Id, pedido.Produto.Id, pedido.Cliente.Id, pedido.Quantidade)));
+			memoryStream.WriteByte(0x0A);
 
-			return pedido;
+			//streamWriter.Close();
+			Task<bool> result = arquivoDados.PutArquivo("ListaPedido.txt", memoryStream);
+
+			Task.WaitAll(result);
+			memoryStream.Close();
+
+			if (result.Result)
+			{
+				return pedido;
+			}
+			else
+			{
+				return null;
+			}
 		}
 		public Pedido GetPedido(int codigo)
 		{
