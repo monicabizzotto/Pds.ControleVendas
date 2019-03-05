@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Pds.ControleVendas.Dados;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Pds.ControleVendas.Api
@@ -47,6 +48,7 @@ namespace Pds.ControleVendas.Api
 
 			services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
 			services.AddAWSService<IAmazonS3>();
+			services.AddSingleton<ArquivoDados>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

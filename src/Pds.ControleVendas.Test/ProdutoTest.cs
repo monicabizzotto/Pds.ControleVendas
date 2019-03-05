@@ -1,4 +1,5 @@
 using Amazon.S3;
+using Pds.ControleVendas.Dados;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -7,16 +8,19 @@ namespace Pds.ControleVendas.Test
 {
 	public class ProdutoTest
 	{
-		private IAmazonS3 amazonS3;
-		public ProdutoTest(IAmazonS3 amazonS3)
+		private readonly IAmazonS3 amazonS3;
+		private readonly ArquivoDados arquivoDados;
+
+		public ProdutoTest(IAmazonS3 amazonS3, ArquivoDados arquivoDados)
 		{
 			this.amazonS3 = amazonS3;
+			this.arquivoDados = arquivoDados;
 		}
 
 		[Fact]
 		public void ListarProdutos()
 		{
-			var produtoNegocio = new Negocio.ProdutoNegocio(amazonS3);
+			var produtoNegocio = new Negocio.ProdutoNegocio(amazonS3, arquivoDados);
 			
 			Assert.NotNull(produtoNegocio);
 			Assert.IsType<Negocio.ProdutoNegocio>(produtoNegocio);

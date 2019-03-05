@@ -9,10 +9,13 @@ namespace Pds.ControleVendas.Negocio
 {
 	public class PedidoNegocio
 	{
-		private IAmazonS3 s3Client;
-		public PedidoNegocio(IAmazonS3 s3Client)
+		private readonly IAmazonS3 s3Client;
+		private readonly ArquivoDados arquivoDados;
+
+		public PedidoNegocio(IAmazonS3 s3Client, ArquivoDados arquivoDados)
 		{
 			this.s3Client = s3Client;
+			this.arquivoDados = arquivoDados;
 		}
 
 		public Pedido AddPedido(Pedido pedido)
@@ -40,7 +43,7 @@ namespace Pds.ControleVendas.Negocio
 			pedidos = pedidoDados.GetRetornoPedido();
 			pedidoDados = null;
 
-			ProdutoNegocio produtoNegocio = new ProdutoNegocio(s3Client);
+			ProdutoNegocio produtoNegocio = new ProdutoNegocio(s3Client, arquivoDados);
 
 			for (int i = 0; i < pedidos.Count; i++)
 			{

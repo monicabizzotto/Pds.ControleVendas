@@ -6,6 +6,7 @@ using Amazon.S3;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pds.ControleVendas.Api.Model;
+using Pds.ControleVendas.Dados;
 using Pds.ControleVendas.Negocio;
 
 namespace Pds.ControleVendas.Api.Controllers
@@ -14,10 +15,13 @@ namespace Pds.ControleVendas.Api.Controllers
 	[ApiController]
 	public class PedidoController : ControllerBase
 	{
-		private IAmazonS3 s3Client;
-		public PedidoController(IAmazonS3 s3Client)
+		private readonly IAmazonS3 s3Client;
+		private readonly ArquivoDados arquivoDados;
+		
+		public PedidoController(IAmazonS3 s3Client, ArquivoDados arquivoDados)
 		{
 			this.s3Client = s3Client;
+			this.arquivoDados = arquivoDados;
 		}
 
 		[HttpPost]
@@ -25,7 +29,7 @@ namespace Pds.ControleVendas.Api.Controllers
 		[ProducesResponseType(typeof(Model.PedidoResponse), 200)]
 		public async Task<IActionResult> Post([FromBody] PedidoRequest pedidoRequest)
 		{
-			PedidoNegocio pedidoNegocio = new PedidoNegocio(s3Client);
+			PedidoNegocio pedidoNegocio = new PedidoNegocio(s3Client, arquivoDados);
 
 			return Ok(pedidoNegocio.AddPedido(pedidoRequest.ToPedido()) as PedidoResponse);
 		}
@@ -35,7 +39,7 @@ namespace Pds.ControleVendas.Api.Controllers
 		[ProducesResponseType(typeof(List<Dominio.RetornoPedido>), 200)]
 		public async Task<IActionResult> GetStatusPedidos()
 		{
-			PedidoNegocio pedidoNegocio = new PedidoNegocio(s3Client);
+			PedidoNegocio pedidoNegocio = new PedidoNegocio(s3Client, arquivoDados);
 
 			var retorno = pedidoNegocio.GetRetornoPedido();
 
@@ -45,7 +49,7 @@ namespace Pds.ControleVendas.Api.Controllers
 		[Route("{idPedido}/status")]
 		public async Task<IActionResult> GetStatusPedido(int idPedido)
 		{
-			PedidoNegocio pedidoNegocio = new PedidoNegocio(s3Client);
+			PedidoNegocio pedidoNegocio = new PedidoNegocio(s3Client, arquivoDados);
 
 			pedidoNegocio.GetRetornoPedido();
 

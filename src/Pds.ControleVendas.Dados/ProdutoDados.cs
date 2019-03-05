@@ -10,11 +10,13 @@ namespace Pds.ControleVendas.Dados
 {
 	public class ProdutoDados
 	{
-		private ArquivoDados arquivoDados;
-
-		public ProdutoDados(IAmazonS3 s3Client)
+		private readonly ArquivoDados arquivoDados;
+		private readonly IAmazonS3 s3Client;
+		
+		public ProdutoDados(IAmazonS3 s3Client, ArquivoDados arquivoDados)
 		{
-			arquivoDados = new ArquivoDados(s3Client);
+			this.s3Client = s3Client;
+			this.arquivoDados = arquivoDados;
 		}
 
 		public List<Produto> GetProdutos()

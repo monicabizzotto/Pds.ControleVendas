@@ -9,15 +9,18 @@ namespace Pds.ControleVendas.Negocio
 {
 	public class ProdutoNegocio
 	{
-		private IAmazonS3 s3Client;
-		public ProdutoNegocio(IAmazonS3 s3Client)
+		private readonly IAmazonS3 s3Client;
+		private readonly ArquivoDados arquivoDados;
+		
+		public ProdutoNegocio(IAmazonS3 s3Client, ArquivoDados arquivoDados)
 		{
 			this.s3Client = s3Client;
+			this.arquivoDados = arquivoDados;
 		}
 
 		public List<Produto> GetProdutos()
 		{
-			ProdutoDados produtoDados = new ProdutoDados(s3Client);
+			ProdutoDados produtoDados = new ProdutoDados(s3Client, arquivoDados);
 			FornecedorNegocio fornecedorNegocio = new FornecedorNegocio();
 			var produtos = produtoDados.GetProdutos();
 
@@ -30,7 +33,7 @@ namespace Pds.ControleVendas.Negocio
 		}
 		public Produto GetProduto(int codigo)
 		{
-			ProdutoDados produtoDados = new ProdutoDados(s3Client);
+			ProdutoDados produtoDados = new ProdutoDados(s3Client, arquivoDados);
 
 			var produto = produtoDados.GetProduto(codigo);
 

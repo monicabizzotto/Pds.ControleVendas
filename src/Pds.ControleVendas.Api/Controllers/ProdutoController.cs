@@ -14,10 +14,13 @@ namespace Pds.ControleVendas.Api.Controllers
 	[ApiController]
 	public class ProdutoController : ControllerBase
 	{
-		private IAmazonS3 s3Client;
-		public ProdutoController(IAmazonS3 s3Client)
+		private readonly IAmazonS3 s3Client;
+		private readonly Dados.ArquivoDados arquivoDados;
+
+		public ProdutoController(IAmazonS3 s3Client, Dados.ArquivoDados arquivoDados)
 		{
 			this.s3Client = s3Client;
+			this.arquivoDados = arquivoDados;
 		}
 
 		[HttpGet]
@@ -27,7 +30,7 @@ namespace Pds.ControleVendas.Api.Controllers
 		{
 			try
 			{
-				ProdutoNegocio produtoNegocio = new ProdutoNegocio(s3Client);
+				ProdutoNegocio produtoNegocio = new ProdutoNegocio(s3Client, arquivoDados);
 
 				var retorno = new ProdutoResponse() { Produtos = produtoNegocio.GetProdutos() };
 

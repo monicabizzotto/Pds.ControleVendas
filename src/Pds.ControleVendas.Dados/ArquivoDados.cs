@@ -12,7 +12,8 @@ namespace Pds.ControleVendas.Dados
 {
 	public class ArquivoDados
 	{
-		IAmazonS3 s3Client;
+		private readonly IAmazonS3 s3Client;
+
 		public ArquivoDados(IAmazonS3 s3Client)
 		{
 			this.s3Client = s3Client;
@@ -22,8 +23,10 @@ namespace Pds.ControleVendas.Dados
 				AccessKey = "AKIAJQJV7TW2I5HDQDYQ",
 				SecretKey = "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"
 			};
+
 			var profile = new Amazon.Runtime.CredentialManagement.CredentialProfile("profile", options);
 			profile.Region = RegionEndpoint.USEast1;
+
 			var netSDKFile = new NetSDKCredentialsFile();
 			netSDKFile.RegisterProfile(profile);
 		}
