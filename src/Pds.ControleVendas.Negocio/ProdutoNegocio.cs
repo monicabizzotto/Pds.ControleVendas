@@ -21,7 +21,7 @@ namespace Pds.ControleVendas.Negocio
 		public List<Produto> GetProdutos()
 		{
 			ProdutoDados produtoDados = new ProdutoDados(s3Client, arquivoDados);
-			FornecedorNegocio fornecedorNegocio = new FornecedorNegocio();
+			FornecedorNegocio fornecedorNegocio = new FornecedorNegocio(s3Client, arquivoDados);
 			var produtos = produtoDados.GetProdutos();
 
 			for (int i = 0; i < produtos.Count; i++)

@@ -1,22 +1,29 @@
-﻿using Pds.ControleVendas.Dominio;
+﻿using Amazon.S3;
+using Pds.ControleVendas.Dominio;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Pds.ControleVendas.Dados
 {
 	public class FornecedorDados
 	{
-		private string path = @"C:\Users\pgoli\OneDrive\POCMonica\TemplateArquivos\Fornecedores.txt";
+		private readonly ArquivoDados arquivoDados;
+		private readonly IAmazonS3 s3Client;
 
-		public FornecedorDados()
+		public FornecedorDados(IAmazonS3 s3Client, ArquivoDados arquivoDados)
 		{
+			this.s3Client = s3Client;
+			this.arquivoDados = arquivoDados;
 		}
 
 		public List<Fornecedor> GetFornecedores()
 		{
-			StreamReader streamReader = new StreamReader(path);
+			var ms = arquivoDados.GetArquivo("Fornecedores.txt");
+			Task.WaitAll(ms);
+			StreamReader streamReader = new StreamReader(ms.Result);
 
 			if (!streamReader.EndOfStream)
 				streamReader.ReadLine();
@@ -38,7 +45,9 @@ namespace Pds.ControleVendas.Dados
 		}
 		public Fornecedor GetFornecedor(int id)
 		{
-			StreamReader streamReader = new StreamReader(path);
+			var ms = arquivoDados.GetArquivo("Fornecedores.txt");
+			Task.WaitAll(ms);
+			StreamReader streamReader = new StreamReader(ms.Result);
 
 			if (!streamReader.EndOfStream)
 				streamReader.ReadLine();
