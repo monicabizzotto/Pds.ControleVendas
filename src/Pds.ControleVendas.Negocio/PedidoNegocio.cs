@@ -34,6 +34,26 @@ namespace Pds.ControleVendas.Negocio
 
 			return pedido;
 		}
+		public List<Pedido> GetPedidos()
+		{
+			List<Pedido> pedidos = new List<Pedido>();
+
+			PedidoDados pedidoDados = new PedidoDados(s3Client);
+
+			pedidos = pedidoDados.GetPedidos();
+			pedidoDados = null;
+
+			ProdutoNegocio produtoNegocio = new ProdutoNegocio(s3Client, arquivoDados);
+
+			for (int i = 0; i < pedidos.Count; i++)
+			{
+				pedidos[i].Produto = produtoNegocio.GetProduto(pedidos[i].Produto.Id);
+			}
+
+			produtoNegocio = null;
+
+			return pedidos;
+		}
 		public List<RetornoPedido> GetRetornoPedido()
 		{
 			List<RetornoPedido> pedidos = new List<RetornoPedido>();

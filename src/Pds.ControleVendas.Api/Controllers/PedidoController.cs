@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pds.ControleVendas.Api.Model;
 using Pds.ControleVendas.Dados;
+using Pds.ControleVendas.Dominio;
 using Pds.ControleVendas.Negocio;
 
 namespace Pds.ControleVendas.Api.Controllers
@@ -22,6 +23,17 @@ namespace Pds.ControleVendas.Api.Controllers
 		{
 			this.s3Client = s3Client;
 			this.arquivoDados = arquivoDados;
+		}
+
+
+		[HttpGet]
+		[Route("")]
+		[ProducesResponseType(typeof(List<Pedido>), 200)]
+		public async Task<IActionResult> Get()
+		{
+			PedidoNegocio pedidoNegocio = new PedidoNegocio(s3Client, arquivoDados);
+
+			return Ok(pedidoNegocio.GetPedidos());
 		}
 
 		[HttpPost]

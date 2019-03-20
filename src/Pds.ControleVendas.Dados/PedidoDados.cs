@@ -106,6 +106,37 @@ namespace Pds.ControleVendas.Dados
 
 			return pedido;
 		}
+		public List<Pedido> GetPedidos()
+		{
+			var ms = arquivoDados.GetArquivo("ListaPedido.txt");
+			Task.WaitAll(ms);
+			StreamReader streamReader = new StreamReader(ms.Result);
+
+			string linha = "";
+			List<Pedido> pedidos = new List<Pedido>();
+
+			while (!streamReader.EndOfStream)
+			{
+				linha = streamReader.ReadLine();
+
+				if (!String.IsNullOrEmpty(linha) && !linha.Equals("CodigoPedido;CodigoProduto;CodigoCliente;Quantidade;"))
+				{
+					string[] linhaArr = linha.Split(";");
+
+					pedidos.Add(new Pedido()
+					{
+						Id = Convert.ToInt32(linhaArr[0]),
+						Produto = new Produto() { Id = Convert.ToInt32(linhaArr[1]) },
+						Cliente = new Cliente() { Id = Convert.ToInt32(linhaArr[2]) },
+						Quantidade = Convert.ToInt32(linhaArr[3])
+					});
+				}
+			}
+
+			streamReader.Close();
+
+			return pedidos;
+		}
 		public List<RetornoPedido> GetRetornoPedido()
 		{
 			var ms = arquivoDados.GetArquivo("RetornoPedido.txt");
